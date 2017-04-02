@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cybulski.tomasz.tomaszcybulskilab1.MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        >
+        <TextView
+            android:id="@+id/text_view_mass_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mass_label"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/edit_text_mass"
+            android:layout_alignBaseline="@id/text_view_mass_label"
+            android:layout_toEndOf="@id/text_view_mass_label"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_mass_text"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_height_label"
+            android:layout_below="@id/text_view_mass_label"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/height_label"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/edit_view_height"
+            android:layout_below="@id/edit_text_mass"
+            android:layout_toEndOf="@id/text_view_height_label"
+            android:layout_alignBaseline="@id/text_view_height_label"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_height_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/button_count_bmi"
+            android:layout_below="@id/edit_view_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/count_bmi"
+            android:onClick="countBMI"/>
+
+        <TextView
+            android:id="@+id/text_view_bmi_label"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/button_count_bmi"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bmi_label_label"
+            android:textSize="30sp"
+            />
+        <TextView
+            android:id="@+id/text_view_result_bmi"
+            android:layout_below="@id/text_view_bmi_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            />
+        <TextView
+            android:id="@+id/text_view_result_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/text_view_result_bmi"/>
+    </RelativeLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>
