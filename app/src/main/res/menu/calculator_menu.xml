@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_item_save"
+        android:title="@string/save"
+        />
+    <item android:id="@+id/menu_item_share"
+        android:title="@string/share"
+        />
+    <item android:id="@+id/menu_item_settings"
+        android:title="@string/settings"
+        android:onClick="startSettingsActivity"
+        />
+    <item android:id="@+id/menu_item_author"
+        android:title="@string/author"
+        android:onClick="startAuthorActivity"
+        />
+</menu>

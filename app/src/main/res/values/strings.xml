@@ -10,9 +10,17 @@
     <string name="bmi_result_normal_range">Yours weight is correct!</string>
     <string name="bmi_result_overweight">You have overweight!</string>
     <string name="bmi_result_obese">You are obese, fatty!</string>
+
     <string name="incorrect_input_message">You\'ve entered incorrect data!</string>
     <string name="empty_input_message">Please enter height and mass</string>
+
     <string name="settings">Settings</string>
+    <string name="save">Save</string>
+    <string name="share">Share</string>
+    <string name="author">Author</string>
+
+    <string name="unit_label">Units:</string>
+    <string name="use_metric_units_shared_pref_key">use_metric_units</string>
     <string name="metric_units">Metric kg/m</string>
     <string name="imperial_units">Imperial lb/in</string>
 </resources>

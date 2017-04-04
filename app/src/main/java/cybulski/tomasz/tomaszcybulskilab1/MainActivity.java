@@ -1,5 +1,8 @@
 package cybulski.tomasz.tomaszcybulskilab1;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,11 +13,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+/*
+*TODO
+* przyciski:
+* - save
+* - share - wyskakuje lista aplikacji
+* - author - opis + zdjęcie
+* ma zachować wyliczone dane po obróceniu i don't keep activity
+*
+*
+*/
 
 public class MainActivity extends AppCompatActivity {
 
-    UnitOfMeasure unit = UnitOfMeasure.METRIC;
     private ICountBMI countBMI;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +37,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume(){
+        super.onResume();
+        setBMICounter();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.unit_selection_menu, menu);
+        getMenuInflater().inflate(R.menu.calculator_menu, menu);
         return true;
     }
 
@@ -34,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             float mass = Float.parseFloat(((EditText) findViewById(R.id.edit_text_mass)).getText().toString());
             float countedBMI = countBMI.countBMI(mass, height);
             TextView textViewBMIResult = (TextView) findViewById(R.id.text_view_result_bmi);
-            textViewBMIResult.setText(String.valueOf(countedBMI));
+            textViewBMIResult.setText(String.format(Locale.getDefault(), "%.2f", countedBMI));
             setTextViewResultMessage(countedBMI, textViewBMIResult);
 
         } catch (InvalidMassOrHeightException e){
@@ -68,30 +88,23 @@ public class MainActivity extends AppCompatActivity {
         textViewBMIResult.setTextColor(textMessageColor);
     }
 
-    public void setUnits(MenuItem menuItem){
-        switch (menuItem.getItemId()){
-            case R.id.use_imperial_units:
-                unit = UnitOfMeasure.IMPERIAL;
-                menuItem.setChecked(true);
-                break;
-            case R.id.use_metric_units:
-                unit = UnitOfMeasure.METRIC;
-                menuItem.setChecked(true);
-                break;
-            default:
-                break;
+    private void setBMICounter(){
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        boolean useMetricUnits = sharedPreferences.getBoolean(getString(R.string.use_metric_units_shared_pref_key), true);
+        if(useMetricUnits){
+            countBMI = new CountBMIMetric();
+        } else {
+            countBMI = new CountBMIImperial();
         }
-        setBMICounter();
     }
 
-    private void setBMICounter(){
-        switch (unit){
-            case IMPERIAL:
-                countBMI = new CountBMIImperial();
-                break;
-            case METRIC:
-                countBMI = new CountBMIMetric();
-                break;
-        }
+    public void startSettingsActivity(MenuItem menuItem){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void startAuthorActivity(MenuItem menuItem){
+        Intent intent = new Intent(this, AuthorActivity.class);
+        startActivity(intent);
     }
 }

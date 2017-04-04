@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cybulski.tomasz.tomaszcybulskilab1.SettingsActivity">
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/text_view_unit_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/unit_label"
+            />
+        <RadioButton
+            android:id="@+id/radio_button_metric_units"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/metric_units"
+            android:onClick="setUnits"/>
+        <RadioButton
+            android:id="@+id/radio_button_imperial_units"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/imperial_units"
+            android:onClick="setUnits"/>
+    </RadioGroup>
+
+</android.support.constraint.ConstraintLayout>
