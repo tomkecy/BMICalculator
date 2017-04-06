@@ -1,14 +1,17 @@
-package cybulski.tomasz.tomaszcybulskilab1;
+package cybulski.tomasz.tomaszcybulskilab1.Concrete;
+
+import cybulski.tomasz.tomaszcybulskilab1.Abstract.ICountBMI;
+import cybulski.tomasz.tomaszcybulskilab1.Entities.InvalidMassOrHeightException;
 
 /**
  * Created by tomcy on 20.03.2017.
  */
 
 public class CountBMIMetric implements ICountBMI {
-    static final float MINIMAL_HEIGHT = 0.5f;
-    static final float MAXIMAL_HEIGHT = 2.5f;
-    static final float MINIMAL_MASS = 10f;
-    static final float MAXIMAL_MASS = 250f;
+    private static final float MINIMAL_HEIGHT = 0.5f;
+    private static final float MAXIMAL_HEIGHT = 2.5f;
+    private static final float MINIMAL_MASS = 10f;
+    private static final float MAXIMAL_MASS = 250f;
 
     @Override
     public boolean isValidMass(float mass) {
@@ -21,7 +24,7 @@ public class CountBMIMetric implements ICountBMI {
     }
 
     @Override
-    public float countBMI(float mass, float height) throws InvalidMassOrHeightException{
+    public float countBMI(float mass, float height) throws InvalidMassOrHeightException {
         if (!isValidHeight(height) || !isValidMass(mass)){
             throw new InvalidMassOrHeightException();
         }

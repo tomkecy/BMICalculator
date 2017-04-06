@@ -1,7 +1,9 @@
-package cybulski.tomasz.tomaszcybulskilab1;
+package cybulski.tomasz.tomaszcybulskilab1.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import cybulski.tomasz.tomaszcybulskilab1.R;
 
 public class AuthorActivity extends AppCompatActivity {
 

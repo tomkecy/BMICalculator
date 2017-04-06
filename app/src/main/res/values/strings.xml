@@ -6,8 +6,8 @@
     <string name="enter_mass_text">Enter Your mass here</string>
     <string name="enter_height_text">Enter Your height here</string>
     <string name="bmi_label_label">BMI:</string>
-    <string name="bmi_result_underweight">Yours weight is to low!</string>
-    <string name="bmi_result_normal_range">Yours weight is correct!</string>
+    <string name="bmi_result_underweight">Your weight is to low!</string>
+    <string name="bmi_result_normal_range">Your weight is correct!</string>
     <string name="bmi_result_overweight">You have overweight!</string>
     <string name="bmi_result_obese">You are obese, fatty!</string>
 
@@ -20,7 +20,22 @@
     <string name="author">Author</string>
 
     <string name="unit_label">Units:</string>
-    <string name="use_metric_units_shared_pref_key">use_metric_units</string>
     <string name="metric_units">Metric kg/m</string>
     <string name="imperial_units">Imperial lb/in</string>
+
+    <string name="saved_data_message">Saved data</string>
+    <string name="facebook_app_id">1023526087748730</string>
+
+    <!-- SharedPreference keys -->
+    <string name="use_metric_units_shared_pref_key">use_metric_units</string>
+    <string name="saved_mass_shared_pref_key">saved_mass</string>
+    <string name="saved_height_shared_pref_key">saved_height</string>
+
+    <!-- SavedInstanceState keys -->
+
+    <string name="mass_saved_instance_state_key">mass_saved_instance_state</string>
+    <string name="height_saved_instance_state_key">height_saved_instance_state</string>
+    <string name="result_bmi_saved_instance_state_key">bmi_saved_instance_state</string>
+    <string name="message_saved_instance_state_key">message_saved_instance_state</string>
+    <string name="color_saved_instance_state_key">color_saved_instance_state</string>
 </resources>

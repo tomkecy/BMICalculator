@@ -1,4 +1,6 @@
-package cybulski.tomasz.tomaszcybulskilab1;
+package cybulski.tomasz.tomaszcybulskilab1.Abstract;
+
+import cybulski.tomasz.tomaszcybulskilab1.Entities.InvalidMassOrHeightException;
 
 /**
  * Created by tomcy on 20.03.2017.

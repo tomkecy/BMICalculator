@@ -2,6 +2,10 @@ package cybulski.tomasz.tomaszcybulskilab1;
 
 import org.junit.Test;
 
+import cybulski.tomasz.tomaszcybulskilab1.Abstract.ICountBMI;
+import cybulski.tomasz.tomaszcybulskilab1.Concrete.CountBMIMetric;
+import cybulski.tomasz.tomaszcybulskilab1.Entities.InvalidMassOrHeightException;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
