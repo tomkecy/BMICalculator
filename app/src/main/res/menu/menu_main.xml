@@ -10,14 +10,11 @@
 
     <item android:id="@+id/menu_item_save"
         android:title="@string/save"
-        android:onClick="saveData"
         />
     <item android:id="@+id/menu_item_settings"
         android:title="@string/settings"
-        android:onClick="startSettingsActivity"
         />
     <item android:id="@+id/menu_item_author"
         android:title="@string/author"
-        android:onClick="startAuthorActivity"
         />
 </menu>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,7 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.ShareActionProvider;
+import android.support.v7.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,20 +60,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void restoreSavedData(){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String savedHeightText = sharedPreferences.getString(
-                getString(R.string.saved_height_shared_pref_key), "");
-        String savedMassText = sharedPreferences.getString(
-                getString(R.string.saved_mass_shared_pref_key), "");
-
-        editTextHeight.setText(savedHeightText);
-        editTextMass.setText(savedMassText);
-        if(!savedHeightText.isEmpty() && !savedMassText.isEmpty()){
-            countBMI();
-        }
-    }
-
     @Override
     protected void onResume(){
         super.onResume();
@@ -82,12 +69,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.calculator_menu, menu);
-
-        MenuItem item = menu.findItem(R.id.menu_item_share);
-        //mShareActionProvider = (ShareActionProvider) item.getActionProvider();
-
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menu_item_share:
+                shareResult();
+                return true;
+            case R.id.menu_item_save:
+                saveData();
+                return true;
+            case R.id.menu_item_settings:
+                startSettingsActivity();
+                return true;
+            case R.id.menu_item_author:
+                startAuthorActivity();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
     }
 
     @Override
@@ -161,6 +164,20 @@ public class MainActivity extends AppCompatActivity {
         textViewResultBMI.setTextColor(textMessageColor);
     }
 
+    private void restoreSavedData(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String savedHeightText = sharedPreferences.getString(
+                getString(R.string.saved_height_shared_pref_key), "");
+        String savedMassText = sharedPreferences.getString(
+                getString(R.string.saved_mass_shared_pref_key), "");
+
+        editTextHeight.setText(savedHeightText);
+        editTextMass.setText(savedMassText);
+        if(!savedHeightText.isEmpty() && !savedMassText.isEmpty()){
+            countBMI();
+        }
+    }
+
     private void setBMICounter() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean useMetricUnits = sharedPreferences.getBoolean(getString(R.string.use_metric_units_shared_pref_key), true);
@@ -171,17 +188,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void startSettingsActivity(MenuItem menuItem){
+    private void startSettingsActivity(){
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
-    public void startAuthorActivity(MenuItem menuItem) {
+    private void startAuthorActivity() {
         Intent intent = new Intent(this, AuthorActivity.class);
         startActivity(intent);
     }
 
-    public void saveData(MenuItem menuItem){
+    private void saveData(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(getString(R.string.saved_height_shared_pref_key), editTextHeight.getText().toString());
@@ -189,11 +206,16 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
         Toast.makeText(this, getString(R.string.saved_data_message), Toast.LENGTH_SHORT).show();
     }
-    private ShareActionProvider mShareActionProvider;
 
-    private void setShareIntent(Intent shareIntent) {
-        if (mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(shareIntent);
+    private void shareResult(){
+        if(textViewResultBMI.getText().toString().isEmpty()){
+            return;
         }
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType(getString(R.string.type_text_plain));
+        String shareBody = getString(R.string.share_result_sentence);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.share_subject));
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.options)));
     }
 }
