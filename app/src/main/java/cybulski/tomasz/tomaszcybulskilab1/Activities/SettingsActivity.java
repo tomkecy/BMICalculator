@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cybulski.tomasz.tomaszcybulskilab1.R;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick({R.id.radio_button_metric_units, R.id.radio_button_imperial_units})
     public void setUnits(View view){
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();

@@ -27,7 +27,7 @@
     <string name="author_label">Author</string>
     <string name="author_info_line1">Tomasz Cybulski</string>
     <string name="author_info_line2">II Year Computer Science Student</string>
-    <string name="author_image_description">Author's photo</string>
+    <string name="author_image_description">Author\'s photo</string>
 
 
     <string name="facebook_app_id">1023526087748730</string>
