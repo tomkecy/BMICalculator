@@ -14,6 +14,7 @@
     <string name="incorrect_input_message">You\'ve entered incorrect data!</string>
     <string name="empty_input_message">Please enter height and mass</string>
     <string name="saved_data_message">Saved data</string>
+    <string name="share_not_counted_bmi_message">Count Your BMI first</string>
     
     <string name="settings">Settings</string>
     <string name="save">Save</string>
@@ -33,7 +34,7 @@
     <string name="facebook_app_id">1023526087748730</string>
 
     <string name="options">Options</string>
-    <string name="share_result_sentence">My BMI is: </string>
+    <string name="share_result_sentence">My BMI is:\u0020</string>
     <string name="type_text_plain">"text/plain"</string>
     <string name="share_subject">Share</string>
 
@@ -47,6 +48,4 @@
     <string name="mass_saved_instance_state_key">mass_saved_instance_state</string>
     <string name="height_saved_instance_state_key">height_saved_instance_state</string>
     <string name="result_bmi_saved_instance_state_key">bmi_saved_instance_state</string>
-    <string name="message_saved_instance_state_key">message_saved_instance_state</string>
-    <string name="color_saved_instance_state_key">color_saved_instance_state</string>
 </resources>

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,10 +11,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.support.v7.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
@@ -27,16 +27,6 @@ import cybulski.tomasz.tomaszcybulskilab1.Entities.InvalidMassOrHeightException;
 import cybulski.tomasz.tomaszcybulskilab1.R;
 
 import butterknife.Bind;
-/*
-*TODO
-* przyciski:
-* - save
-* - share - wyskakuje lista aplikacji
-* - author - opis + zdjęcie
-* ma zachować wyliczone dane po obróceniu i don't keep activity
-*
-*
-*/
 
 public class MainActivity extends AppCompatActivity {
 
@@ -96,16 +86,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-            outState.putString(getString(R.string.mass_saved_instance_state_key),
-                    editTextMass.getText().toString());
-            outState.putString(getString(R.string.height_saved_instance_state_key),
-                    editTextHeight.getText().toString());
-            outState.putString(getString(R.string.result_bmi_saved_instance_state_key),
-                    textViewResultBMI.getText().toString());
-            outState.putString(getString(R.string.message_saved_instance_state_key),
-                    textViewResultMessage.getText().toString());
-            outState.putInt(getString(R.string.color_saved_instance_state_key),
-                    textViewResultBMI.getCurrentTextColor());
+        outState.putString(getString(R.string.mass_saved_instance_state_key),
+                editTextMass.getText().toString());
+        outState.putString(getString(R.string.height_saved_instance_state_key),
+                editTextHeight.getText().toString());
+        outState.putString(getString(R.string.result_bmi_saved_instance_state_key),
+                textViewResultBMI.getText().toString());
     }
 
     @Override
@@ -115,13 +101,17 @@ public class MainActivity extends AppCompatActivity {
                 R.string.mass_saved_instance_state_key)));
         editTextHeight.setText(savedInstanceState.getString(getString(
                 R.string.height_saved_instance_state_key)));
-        textViewResultBMI.setText(savedInstanceState.getString(getString(
-                R.string.result_bmi_saved_instance_state_key)));
-        textViewResultMessage.setText(savedInstanceState.getString(getString(
-                R.string.message_saved_instance_state_key)));
-        int colorId = savedInstanceState.getInt(getString(R.string.color_saved_instance_state_key));
-        textViewResultBMI.setTextColor(colorId);
-        textViewResultMessage.setTextColor(colorId);
+
+        String saved_bmi_string_value = savedInstanceState.getString(getString(
+                R.string.result_bmi_saved_instance_state_key));
+        textViewResultBMI.setText(saved_bmi_string_value);
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        try {
+            float savedBMI = numberFormat.parse(saved_bmi_string_value).floatValue();
+            setTextViewResultMessage(savedBMI);
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @OnClick(R.id.button_count_bmi)
@@ -173,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
         editTextHeight.setText(savedHeightText);
         editTextMass.setText(savedMassText);
+
         if(!savedHeightText.isEmpty() && !savedMassText.isEmpty()){
             countBMI();
         }
@@ -209,11 +200,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void shareResult(){
         if(textViewResultBMI.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), R.string.share_not_counted_bmi_message,
+                    Toast.LENGTH_LONG).show();
             return;
         }
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType(getString(R.string.type_text_plain));
-        String shareBody = getString(R.string.share_result_sentence);
+        String shareBody = getString(R.string.share_result_sentence) + textViewResultBMI.getText();
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.share_subject));
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, getString(R.string.options)));
