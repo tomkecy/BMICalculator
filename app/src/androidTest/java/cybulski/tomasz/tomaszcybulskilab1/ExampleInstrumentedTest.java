@@ -11,10 +11,6 @@ import static org.junit.Assert.*;
 
 /**
  * Instrumentation test, which will execute on an Android device.
- *Dodatkowo testy UI w Espresso
- * Dodatkowo obczaić w appium i robotium
- *
- * można obczaić butterknife - służy do redukcji kodu
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
