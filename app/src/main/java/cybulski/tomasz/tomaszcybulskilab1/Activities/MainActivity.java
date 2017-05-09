@@ -30,6 +30,9 @@ import butterknife.Bind;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final double BMI_UNDERWEIGHT = 18.5;
+    public static final double BMI_CORRECT = 25.0;
+    public static final double BMI_OVERWEIGHT = 30.0;
     @Bind(R.id.edit_text_height) EditText editTextHeight;
     @Bind(R.id.edit_text_mass) EditText editTextMass;
     @Bind(R.id.text_view_result_message) TextView textViewResultMessage;
@@ -136,13 +139,13 @@ public class MainActivity extends AppCompatActivity {
     private void setTextViewResultMessage(float countedBMI) {
         String message;
         int textMessageColor;
-        if(countedBMI<18.5) {
+        if(countedBMI< BMI_UNDERWEIGHT) {
             message = getString(R.string.bmi_result_underweight);
             textMessageColor = Color.RED;
-        } else if(countedBMI <= 25){
+        } else if(countedBMI <= BMI_CORRECT){
             message = getString(R.string.bmi_result_normal_range);
             textMessageColor = Color.GREEN;
-        } else if (countedBMI <= 30){
+        } else if (countedBMI <= BMI_OVERWEIGHT){
             message = getString(R.string.bmi_result_overweight);
             textMessageColor = Color.YELLOW;
         } else {
